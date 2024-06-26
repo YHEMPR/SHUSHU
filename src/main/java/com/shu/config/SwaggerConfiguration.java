@@ -47,12 +47,12 @@ public class SwaggerConfiguration {
                         .version("1.0")
                         .license(new License()
                                 .name("1）小SHU书资料共享平台")
-                                .url("https://github.com/Xijian12/Java-web.git")
+                                .url("https://github.com/YHEMPR/SHUSHU.git")
                         )
                 )
                 .externalDocs(new ExternalDocumentation()
                         .description("我们的官方网站")
-                        .url("https://github.com/Xijian12/Java-web.git")
+                        .url("https://github.com/YHEMPR/SHUSHU.git")
                 );
     }
 
