@@ -11,6 +11,7 @@
 
 
 二、软件结构设计：
+开发工具：VSCode(前端)，IntelliJ IDEA(后端)
 前端：使用Vue.js进行开发
 后端：使用 Spring Boot进行开发
 数据库：使用 MySQL
