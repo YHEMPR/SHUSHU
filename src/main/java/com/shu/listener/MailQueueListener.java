@@ -11,21 +11,30 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 用于处理邮件发送的消息队列监听器
+ * 用于处理邮件发送的消息队列监听器。
+ * 监听名为"mail"的队列，接收发送邮件的任务。
  */
 @Component
 @RabbitListener(queues = "mail")
 public class MailQueueListener {
 
+    /**
+     * 注入邮件发送器，用于实际发送邮件。
+     */
     @Resource
     JavaMailSender sender;
 
+    /**
+     * 从配置文件中获取发件人邮箱地址，用于邮件发送。
+     */
     @Value("${spring.mail.username}")
     String username;
 
     /**
-     * 处理邮件发送
-     * @param data 邮件信息
+     * 处理发送邮件的消息。
+     * 根据邮件类型创建相应的邮件内容，并发送邮件。
+     *
+     * @param data 邮件数据，包含邮件类型、验证码和收件人邮箱。
      */
     @RabbitHandler
     public void sendMailMessage(Map<String, Object> data) {
@@ -47,11 +56,13 @@ public class MailQueueListener {
     }
 
     /**
-     * 快速封装简单邮件消息实体
-     * @param title 标题
-     * @param content 内容
-     * @param email 收件人
-     * @return 邮件实体
+     * 创建并返回一个简单的邮件消息实体。
+     * 邮件包括主题、正文和收件人。
+     *
+     * @param title 邮件主题。
+     * @param content 邮件正文。
+     * @param email 收件人邮箱地址。
+     * @return 创建的简单邮件消息实体。
      */
     private SimpleMailMessage createMessage(String title, String content, String email){
         SimpleMailMessage message = new SimpleMailMessage();
