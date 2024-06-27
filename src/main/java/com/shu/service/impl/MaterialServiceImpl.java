@@ -376,14 +376,25 @@ public class MaterialServiceImpl implements MaterialService {
         return materialMapper.countDownloadClickNumBySchool(school);
     }
 
+    /**
+     * 获取排名前N的素材。
+     * 通过综合评价素材的评分、点击量和下载量，计算综合排名，并返回排名前N的素材列表。
+     * 排名算法中，评分、点击量和下载量分别具有不同的权重，以调整各因素对最终排名的影响。
+     *
+     * @param n 指定返回的素材数量，即要获取的排名前N的素材。
+     * @return 包含排名前N的素材的列表。
+     */
     //定义资料排名权重
     @Override
     public List<Material> getTopNMaterials(int n) {
+        // 设置评分、点击量和下载量的权重。权重值的设定基于业务需求，用于影响素材的综合排名。
         double weight1 = 5;    // 资料评分的权重
         double weight2 = 1;    // 点击量的权重
         double weight3 = 2;    // 下载量的权重
+        // 调用materialMapper的selectTopNMaterials方法，根据设定的权重和指定的数量获取排名前N的素材。
         return materialMapper.selectTopNMaterials(weight1, weight2, weight3, n);
     }
+
     //根据ID查询资料的下载量和点击量
     @Override
     public Map<String, Integer> getDownloadClicksByMaterialId(int materialId) {
